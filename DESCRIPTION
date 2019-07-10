@@ -1,11 +1,16 @@
 Package: afrobar
 Type: Package
-Title: What the Package Does (Title Case)
+Title: A helper package for Afrobarometer data 
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Mark Daku
+Maintainer: Mark Daku <mark.daku@gmail.com>
+Description: Simple helper package to import and quickly analyze data from the Afrobarometer
+    Facilitates simple importation, visualization, and analysis of Afrobarometer rounds 1-6
+    Original data from: http://www.afrobarometer.org/
+License: GPL-3
 Encoding: UTF-8
 LazyData: true
+Imports: 
+  labelled
+  tidyverse
+  ggplot2
