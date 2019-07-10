@@ -2,7 +2,7 @@
 
 # Cleans and tidies the data
 
-afro.clean <<- function(afro){
+af.clean <<- function(afro){
   # Lower case all of the functions
   afro <- afro %>% rename_all(tolower)
 
