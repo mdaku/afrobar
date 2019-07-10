@@ -71,9 +71,9 @@ af.load <- function(round=6, force=FALSE){
   else{
     # Downloading file from Afrobarometer.org
     message("Downloading file from Afrobarometer.org")
-    temp <- tempfile()
-    download.file(url, temp)
-    afro <<- read_sav(temp)
+    download.file(url, fname)
+    afro <<- read_sav(fname)
+
   }
   message("Cleaning source file")
   afro <<- af.clean(afro)
