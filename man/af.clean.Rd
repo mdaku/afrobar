@@ -2,17 +2,22 @@
 % Please edit documentation in R/af.clean.R
 \name{af.clean}
 \alias{af.clean}
-\title{Cleans the Afrobarometer dataset.}
+\title{Cleans the Afrobarometer dataset}
 \usage{
 af.clean(afro)
 }
+\arguments{
+\item{afro}{A dataframe containing Afrobarometer data}
+}
 \value{
-A clean version of the global dataframe \code{afro}
+A clean version of the passed in dataframe \code{afro}
 }
 \description{
-Normally called by default by \code{af.load()}
+Returns a clean version of the Afrobarometer dataset. Normally called by default by \code{af.load()}
 }
 \examples{
-af.clean() # Cleans the global version of Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
-af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
+
+# Returns a cleaned version of the afro dataframe loaded
+# using \\code{af.load}
+afro \%>\% af.clean()
 }

@@ -1,13 +1,23 @@
 #' Loads the Afrobarometer dataset
 #'
 #' @name af.load
-#' @param round A number specifying which round of the Afrobarometer to load (6 by default).
+#' @param round A number specifying which round of the Afrobarometer to load (6 by default)
 #' @param force A boolean specifiying whether or not to force the download of a new copy from the website (false by default)
 #' @param clean A boolean specifying whether or not to clean the dataset (TRUE by default)
-#' @return The  dataframe \code{afro}, and sets a global integer \code{af.round}.
+#' @return Returns te dataframe \code{afro}, and sets a global integer \code{af.round}
 #' @examples
-#' af.load() # Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
-#' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
+#'
+#' # Load the 6th round of the Afrobarometer from local file if available,
+#' # or from the website if the local file does not exist
+#' af.load()
+#'
+#' # Download and load the 5th round of the Afrobarometer, ignoring and
+#' # overwriting any local files that exist
+#' af.load(5, force=T)
+#'
+#' # Download and load the 3rd round of the Afrobarometer, ignoring and
+#' # overwriting any local files that exist, do not automatically clean
+#' af.load(5, force=T, clean=F)
 #' @export
 #'
 

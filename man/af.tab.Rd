@@ -12,19 +12,35 @@
 
 \item{miss}{A boolean specifying whether or not to include missing/don't know/refused responses (default FALSE)}
 
-\item{digits}{An integer specifying number of digits to round to (default = 2)}
+\item{digits}{An integer specifying number of digits to round to (default is 2)}
 
 \item{pos}{For two variables, specifies the style of the barplot: "stack" or "dodge" (default)}
 }
 \value{
-A table object of the
+A table object of the proportion table or cross-tab
 }
 \description{
-One and two-way tables for categorical questions
+Easily produced one and two-way tables for categorical questions accompanied by a barplot
+}
+\details{
+If a cross-tab, also performs a chi-square test
 }
 \examples{
-afro \%>\% af.tab("q5") # For question 5: Produces a table of percentages, a table of raw numbers, and a barplot of responses, dropping missing/don't know/refused responses
-afro \%>\% af.tab("q5", miss=T) # For question 5: Produces a table of percentages, a table of raw numbers, and a barplot of responses, includes missing/don't know/refused responses
-afro \%>\% af.tab("q5", "q7") # For questions 5 & 7: Produces a cross-tab table of proportions, a table of raw numbers, and a side-by-sie barplot of responses, dropping missing/don't know/refused responses
-afro \%>\% af.tab("q5", "q7", pos="stack") # For questions 5 & 7: Produces a cross-tab table of proportions, a table of raw numbers, and a stacked barplot of responses, dropping missing/don't know/refused responses
+# For question 5: Produce a table of percentages, a table of raw numbers,
+# and a barplot of responses, dropping missing/don't know/refused responses
+afro \%>\% af.tab("q5")
+
+# For question 5: Produces a table of percentages, a table of raw numbers,
+# and a barplot of responses, including missing/don't know/refused responses
+# afro \%>\% af.tab("q5", miss=T)
+
+# For questions 5 & 7: Produces a cross-tab table of proportions,
+# a table of raw numbers, and a side-by-side barplot of responses,
+# dropping missing/don't know/refused responses
+afro \%>\% af.tab("q5", "q7")
+
+# For questions 5 & 7: Produces a cross-tab table of proportions,
+# a table of raw numbers, and a stacked barplot of responses,
+# dropping missing/don't know/refused responses
+afro \%>\% af.tab("q5", "q7", pos="stack")
 }
