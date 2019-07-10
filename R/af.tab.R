@@ -1,7 +1,22 @@
+#' One and two-way tables for categorical questions
+#'
+#' @name af.load
+#' @param question A string specifying the dependent varirable to examine
+#' @param question2 A string specifying the independent variable to examine
+#' @param digits An integer specifying number of digits to round to (default = 2)
+#' @param
+#' @return A table object of the
+#' @examples
+#' af.tab(afro, "q5") # For question 5: Produces a table of percentages, a table of raw numbers, and a barplot of responses, dropping missing/don't know/refused responses
+#' af.tab(afro, "q5", T) # For question 5: Produces a table of percentages, a table of raw numbers, and a barplot of responses, includes missing/don't know/refused responses
+#' af.tab(afro, "q5", "q7") # For questions 5 & 7: Produces a cross-tab table of proportions, a table of raw numbers, and a side-by-sie barplot of responses, dropping missing/don't know/refused responses
+#' af.tab(afro, "q5", "q7", pos="stack") # For questions 5 & 7: Produces a cross-tab table of proportions, a table of raw numbers, and a stacked barplot of responses, dropping missing/don't know/refused responses
+
+
 # Descriptive Table & Graphs
 library(ggplot2)
 library(labelled)
-af.tab <- function(question, question2=NULL, digits=2, miss=T, pos="dodge"){
+af.tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"){
   # Need to check if question actually exists
   #v <- afro[question,]
   # We are missing the actual question text from the codebook
@@ -32,8 +47,8 @@ af.tab <- function(question, question2=NULL, digits=2, miss=T, pos="dodge"){
       cat("\n")
       cat("Percentages\n")
       a[[question]] <- factor(a[[question]])
-      print(round(prop.table(table(a[question])),digits))
-
+      tab <- (round(prop.table(table(a[question])),digits))
+      print(tab)
       cat("\n")
       cat("Raw numbers\n")
       summary(a[[question]])
@@ -86,7 +101,8 @@ af.tab <- function(question, question2=NULL, digits=2, miss=T, pos="dodge"){
     cat(title)
     cat("\n")
     cat("Percentages\n")
-    print(round(prop.table(table(a[[question]], a[[question2]])),digits))
+    tab <- (round(prop.table(table(a[[question]], a[[question2]])),digits))
+    print(tab)
     cat("\n")
     cat(paste("Chi-squared: ", round(chi$statistic, 2), " (p-value: ", round(chi$p.value, 4), ")", sep=""))
     cat("\n")
@@ -101,15 +117,9 @@ af.tab <- function(question, question2=NULL, digits=2, miss=T, pos="dodge"){
     cat(":\n")
     print(summary(a[[question2]]))
 
-
-    a[[question]] <- factor(a[[question]])
-    a[[question2]] <- factor(a[[question2]])
-
-    print(t)
-
-    round(prop.table(table(a[[question]], a[[question2]])),digits)
+    print(tab)
   }
 
-
+  return(tab)
 
 }
