@@ -1,23 +1,23 @@
-#' Loads Afrobarometer dataset.
+#' Loads the Afrobarometer dataset
 #'
+#' @name af.load
 #' @param round A number specifying which round of the Afrobarometer to load (6 by default).
 #' @param force A boolean specifiying whether or not to force the download of a new copy from the website (false by default)
-#' @return The global dataframe \code{afro},and a global integer \code{af.round}.
+#' @param clean A boolean specifying whether or not to clean the dataset (TRUE by default)
+#' @return The  dataframe \code{afro}, and sets a global integer \code{af.round}.
 #' @examples
 #' af.load() # Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
 #' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
 
 
-# afrobarameteR.R
-# Author: Mark Daku
-# Date Created: July 7, 2019
 
 # Load libraries
+
 library(tidyverse)
 library(haven)
 
 # Functions
-af.load <- function(round=6, force=FALSE){
+af.load <- function(round=6, force=FALSE, clean=TRUE){
   # Specifies the round and whether or not to force the download
   # This may be complicated, as the connection is usually weak
   if (round == 6){
@@ -66,15 +66,22 @@ af.load <- function(round=6, force=FALSE){
   if (file.exists(fname) & force==FALSE){
     # Does the file exist?
     message("Loading local file")
-    afro <<- read_sav(fname)
+    afro <- read_sav(fname)
   }
   else{
     # Downloading file from Afrobarometer.org
     message("Downloading file from Afrobarometer.org")
     download.file(url, fname)
-    afro <<- read_sav(fname)
+    afro <- read_sav(fname)
 
   }
-  message("Cleaning source file")
-  afro <<- af.clean(afro)
+  if (clean){
+    message("Cleaning source file")
+    afro <- af.clean(afro)
+  }
+  else{
+    warning("Afrobarometer data has *not* been cleaned")
+  }
+
+  afro
 }
