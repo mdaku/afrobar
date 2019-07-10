@@ -1,6 +1,6 @@
 Package: afrobar
 Type: Package
-Title: A helper package for Afrobarometer data 
+Title: A simple helper package for working with Afrobarometer data 
 Version: 0.1.0
 Author: Mark Daku
 Maintainer: Mark Daku <mark.daku@gmail.com>
@@ -10,7 +10,4 @@ Description: Simple helper package to import and quickly analyze data from the A
 License: GPL-3
 Encoding: UTF-8
 LazyData: true
-Imports: 
-  labelled
-  tidyverse
-  ggplot2
+RoxygenNote: 6.1.1
