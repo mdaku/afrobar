@@ -7,6 +7,7 @@
 #' @examples
 #' af.clean() # Cleans the global version of Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
 #' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
+#' @export
 
 af.clean <- function(afro){
   # Lower case all of the functions

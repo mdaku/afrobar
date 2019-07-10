@@ -8,6 +8,8 @@
 #' @examples
 #' af.load() # Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
 #' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
+#' @export
+#'
 
 
 
