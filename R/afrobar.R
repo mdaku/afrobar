@@ -1,8 +1,8 @@
-#' afrobar: A package for computating the notorious bar statistic.
+#' afrobar: A package for simply loading and exploring afrobarometer data
 #'
 #' The afrobar package provides functions for the simple loading and exploration of afrobarometer data
 #'
-#' @section Loading & Preparing Data
+#' @section Loading and Preparing Data
 #' af.load()
 #' af.clean()
 #'
@@ -11,4 +11,5 @@
 #'
 #' @docType package
 #' @name afrobar
+
 NULL
