@@ -1,3 +1,13 @@
+#' Loads Afrobarometer dataset.
+#'
+#' @param round A number specifying which round of the Afrobarometer to load (6 by default).
+#' @param force A boolean specifiying whether or not to force the download of a new copy from the website (false by default)
+#' @return The global dataframe \code{afro},and a global integer \code{af.round}.
+#' @examples
+#' af.load() # Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
+#' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
+
+
 # afrobarameteR.R
 # Author: Mark Daku
 # Date Created: July 7, 2019
