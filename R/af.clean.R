@@ -1,8 +1,14 @@
-# afro.clean.R
+#' Cleans the Afrobarometer dataset.
+#'
+#' Normally called by default by \code{af.load()}
+#'
+#' @name af.clean
+#' @return A clean version of the global dataframe \code{afro}
+#' @examples
+#' af.clean() # Cleans the global version of Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
+#' af.load(5, T) # Downloads the 5th round of the Afrobarometer, ignoring local files
 
-# Cleans and tidies the data
-
-af.clean <<- function(afro){
+af.clean <- function(afro){
   # Lower case all of the functions
   afro <- afro %>% rename_all(tolower)
 
