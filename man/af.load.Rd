@@ -2,17 +2,19 @@
 % Please edit documentation in R/af.load.R
 \name{af.load}
 \alias{af.load}
-\title{Loads Afrobarometer dataset.}
+\title{Loads the Afrobarometer dataset}
 \arguments{
 \item{round}{A number specifying which round of the Afrobarometer to load (6 by default).}
 
 \item{force}{A boolean specifiying whether or not to force the download of a new copy from the website (false by default)}
+
+\item{clean}{A boolean specifying whether or not to clean the dataset (TRUE by default)}
 }
 \value{
-The global dataframe \code{afro},and a global integer \code{af.round}.
+The  dataframe \code{afro}, and sets a global integer \code{af.round}.
 }
 \description{
-Loads Afrobarometer dataset.
+Loads the Afrobarometer dataset
 }
 \examples{
 af.load() # Loads the 6th round of the Afrobarometer from local file if available, from the websiteif not
