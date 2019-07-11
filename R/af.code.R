@@ -1,7 +1,8 @@
-#' Prints out the Afrobarometer codebook
+#' Prints out simple Afrobarometer codebook
 #'
 #' @name af.code
-#' @param
+#' @param afro Afrobarometer datafram
+#' @param question Optional: Specify the question whose description you require
 #' @return Returns the descriptions of each variable
 #' @examples
 #'
@@ -15,29 +16,50 @@
 
 library(crayon)
 library(stringr)
-af.code <- function(afro){
 
-for (i in 1:length(afro)){
 
-    question.text <-var_label(afro[i][1])[[1]]
-    l <- str_length(colnames(afro)[i])
-    resid <- (22-l)
-    if (resid < 0) resid =0
-    cat(blue(colnames(afro)[i]))
+af.code <- function(afro, question=NULL){
 
-    for (j in 1:resid){
-      cat(" ")
+if (is.null(question)){
+  for (i in 1:length(afro)){
+
+      question.text <-var_label(afro[i][1])[[1]]
+      l <- str_length(colnames(afro)[i])
+      resid <- (22-l)
+      if (resid < 0) resid =0
+      cat(blue(colnames(afro)[i]))
+
+      for (j in 1:resid){
+        cat(" ")
+      }
+
+      # The following adds info on variable type, but it's useless at the moment
+      #a <- class(afro[[i]])
+      #if(a == "character"){
+      #  cat(yellow(" [chr] "))
+      #}
+      #else if (a == "factor"){
+      #  cat(yellow(" [fct] "))
+      #}
+      cat(question.text)
+      cat("\n")
     }
-
-    # The following adds info on variable type, but it's useless at the moment
-    #a <- class(afro[[i]])
-    #if(a == "character"){
-    #  cat(yellow(" [chr] "))
-    #}
-    #else if (a == "factor"){
-    #  cat(yellow(" [fct] "))
-    #}
-    cat(question.text)
-    cat("\n")
+  }
+  else{
+    if (question %in% colnames(afro)){
+      question.text <-var_label(afro[question][1])[[1]]
+      l <- str_length(colnames(afro)[colnames(afro) == question])
+      resid <- (22-l)
+      if (resid < 0) resid =0
+      cat(blue(colnames(afro)[colnames(afro) == question]))
+      for (j in 1:resid){
+        cat(" ")
+      }
+      cat(question.text)
+      cat("\n")
+    }
+    else{
+      message(paste(question, "is not a valid question in Afrobarometer Round", af.round), sep=" ")
+    }
   }
 }

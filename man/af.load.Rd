@@ -11,7 +11,7 @@
 \item{clean}{A boolean specifying whether or not to clean the dataset (TRUE by default)}
 }
 \value{
-Returns te dataframe \code{afro}, and sets a global integer \code{af.round}
+Returns the dataframe \code{afro}, and sets a global integer \code{af.round}
 }
 \description{
 Loads the Afrobarometer dataset
