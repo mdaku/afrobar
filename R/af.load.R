@@ -4,7 +4,7 @@
 #' @param round A number specifying which round of the Afrobarometer to load (6 by default)
 #' @param force A boolean specifiying whether or not to force the download of a new copy from the website (false by default)
 #' @param clean A boolean specifying whether or not to clean the dataset (TRUE by default)
-#' @return Returns te dataframe \code{afro}, and sets a global integer \code{af.round}
+#' @return Returns the dataframe \code{afro}, and sets a global integer \code{af.round}
 #' @examples
 #'
 #' # Load the 6th round of the Afrobarometer from local file if available,
