@@ -9,7 +9,8 @@
 #' afro %>% af_rem_miss("q5")
 #'
 af_rem_miss <-function(afro, question, silent=FALSE){
-# Incorporates all the missing data tags from each round
+  # Incorporates all the missing data tags from each round
+  # This is likely very slow - we should try to speed it up
   if (!silent) message("Dropping missing values")
   afro <- afro %>% filter(eval(parse(text=question)) != "Missing") %>%
     filter(eval(parse(text=question)) != "Missing data") %>%
