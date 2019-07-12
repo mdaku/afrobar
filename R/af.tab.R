@@ -42,15 +42,19 @@ af.tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"
   #v <- afro[question,]
   # We are missing the actual question text from the codebook
 
-  if (is.null(question2)){
+  # If there is no other question & the question exists
+  if (is.null(question2) & af.contains(afro, question)){
     #eval(parse(text = "x"))
     if(miss){
       a <- afro
     }
     else{
-      a <- afro %>% filter(eval(parse(text=question)) != "Missing") %>%
-      filter(eval(parse(text=question)) != "Don't know") %>%
-        filter(eval(parse(text=question)) != "Refused")
+      a <- afro %>% af.rem.miss(question)
+
+      #
+      #a <- afro %>% filter(eval(parse(text=question)) != "Missing") %>%
+      #filter(eval(parse(text=question)) != "Don't know") %>%
+      #  filter(eval(parse(text=question)) != "Refused")
     }
     g <- a %>%
       ggplot(aes(x=eval(parse(text=question)))) +
@@ -81,23 +85,18 @@ af.tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"
 
 
   }
-
-  else{
-
+  else if (is.null(question2)){
+    message(paste(question,"is not a valid question in Afrobarometer Round", af.round, sep=" "))
+    tab <- "No results"
+  }
+  else if (af.contains(afro, c(question, question2))){
+    # By construction of statements above, question 2 is NOT null
     if(miss){
       a <- afro
     }
     else{
-      a <- afro %>% filter(eval(parse(text=question)) != "Missing") %>%
-        filter(eval(parse(text=question)) != "Don't know") %>%
-        filter(eval(parse(text=question)) != "Don’t know") %>%
-        filter(eval(parse(text=question)) != "Refused") %>%
-        filter(eval(parse(text=question2)) != "Missing") %>%
-        filter(eval(parse(text=question2)) != "Don't know") %>%
-        filter(eval(parse(text=question2)) != "Don’t know") %>%
-        filter(eval(parse(text=question2)) != "Refused")
+      a< - afro %>% af.rem.miss(question) %>% af.rem.miss(question2)
     }
-
 
     title <- paste(var_label(afro[question][1])[[1]],var_label(afro[question2][1])[[1]], sep=" by \n")
     g <- a %>%
@@ -140,7 +139,19 @@ af.tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"
 
     print(tab)
   }
+  else{
+    # This should cover all cases
+    if (!af.contains(afro, question)){
+      message(paste(question,"is not a valid question in Afrobarometer Round", af.round, sep=" "))
+    }
+    if (!af.contains(afro, question2)){
+      message(paste(question2,"is not a valid question in Afrobarometer Round", af.round, sep=" "))
+    }
+    tab <- "No results."
 
+
+  }
   return(tab)
+
 
 }
