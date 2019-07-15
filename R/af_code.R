@@ -18,48 +18,56 @@ library(crayon)
 library(stringr)
 
 
-af_code <- function(afro, question=NULL){
+af_code <- function(afro, q=NULL){
 
-if (is.null(question)){
+  # Build the tibble no matter what
   for (i in 1:length(afro)){
 
-      question.text <-var_label(afro[i][1])[[1]]
-      l <- str_length(colnames(afro)[i])
-      resid <- (22-l)
-      if (resid < 0) resid =0
-      cat(blue(colnames(afro)[i]))
-
-      for (j in 1:resid){
-        cat(" ")
-      }
-
-      # The following adds info on variable type, but it's useless at the moment
-      #a <- class(afro[[i]])
-      #if(a == "character"){
-      #  cat(yellow(" [chr] "))
-      #}
-      #else if (a == "factor"){
-      #  cat(yellow(" [fct] "))
-      #}
-      cat(question.text)
-      cat("\n")
+    question.text <- as.character(var_label(afro[i][1])[[1]])
+    question <- as.character(colnames(afro)[i])
+    if (i == 1){
+      code.tbl <- data.frame(`question` = as.character(question), `question.text` = as.character(question.text))
     }
+    else {
+      code.tbl <- add_row(code.tbl, question = as.character(question), question.text=as.character(question.text))
+    }
+    code.tbl$question <- as.character(code.tbl$question)
+    code.tbl$question.text <- as.character(code.tbl$question.text)
+  }
+  if (is.null(q)){
+    return(as_tibble(code.tbl))
   }
   else{
-    if (af_contains(question)){
-      question_text <-var_label(afro[question][1])[[1]]
-      l <- str_length(colnames(afro)[colnames(afro) == question])
-      resid <- (22-l)
-      if (resid < 0) resid =0
-      cat(blue(colnames(afro)[colnames(afro) == question]))
-      for (j in 1:resid){
-        cat(" ")
-      }
-      cat(question_text)
-      cat("\n")
-    }
-    else{
-      message(paste(question, "is not a valid question in Afrobarometer Round", af_round), sep=" ")
-    }
+#    if (af_contains(afro, question)){
+#      question.text <- as.character(var_label(afro[i][1])[[1]])
+#      question <- as.character(colnames(afro)[i])
+#      ret <- data.frame(`question` = as.character(question), `question.text` = as.character(question.text))
+#    }
+#    else{
+      ret <- code.tbl %>% filter(str_detect(question, q))
+#    }
+    return(as_tibble(ret))
   }
-}
+  #  if (af_contains(afro, question)){
+#
+#      question.text <- as.character(var_label(afro[i][1])[[1]])
+#      question <- as.character(colnames(afro)[i])
+#      code.tbl <- data.frame(`question` = as.character(question), `question.text` = as.character(question.text))
+#      #question_text <-var_label(afro[question][1])[[1]]
+#      #l <- str_length(colnames(afro)[colnames(afro) == question])
+#      #resid <- (22-l)
+#      #if (resid < 0) resid =0
+#      #cat(blue(colnames(afro)[colnames(afro) == question]))
+#      #for (j in 1:resid){
+#      #  cat(" ")
+#      #}
+#      #cat(question_text)
+#      #cat("\n")
+#    }
+#    else{#
+
+
+      # message(paste(question, "is not a valid question in Afrobarometer Round", af_round), sep=" ")
+#    }
+  }
+
