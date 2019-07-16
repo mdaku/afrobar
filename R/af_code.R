@@ -3,18 +3,23 @@
 #' @name af_code
 #' @param afro Afrobarometer datafram
 #' @param question Optional: Specify the question whose description you require
-#' @return Returns the descriptions of each variable
+#' @return Returns a tibble that contains the variable name and the description of each variable
 #' @examples
 #'
 #' # Prints out the codebook for all variables in the current round
 #' # or from the website if the local file does not exist
 #' af_code()
 #'
+#' # Prints out the codebook for all variables that match a particular string in the current round
+#' # or from the website if the local file does not exist
+#' # The following will return q1, q10, q111, etc. and their corresponding variable descriptions
+#' af_code("q1")
+#'
 #' @export
 #'
 #'
 
-library(crayon)
+
 library(stringr)
 
 
