@@ -85,6 +85,8 @@ af_load <- function(round=6, force=FALSE, clean=TRUE){
     message("Downloading file from Afrobarometer.org")
     download.file(url, fname)
     afro <- read_sav(fname)
+    # Does this work?
+    if (is.null(afro)) af_round <<- NULL
 
   }
   if (clean){
@@ -94,6 +96,6 @@ af_load <- function(round=6, force=FALSE, clean=TRUE){
   else{
     warning("Afrobarometer data has *not* been cleaned")
   }
-
+  # This will return the wrong af_round if it fails
   afro
 }
