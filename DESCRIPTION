@@ -16,5 +16,4 @@ Imports:
     labelled,
     haven,
     stringr,
-    ggplot2,
-    crayon
+    ggplot2
