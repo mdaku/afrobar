@@ -16,12 +16,12 @@ af_clean <- function(afro){
   # Lower case all of the functions
   afro <- afro %>% rename_all(tolower)
 
-  # Replace all of the missing labels with NA
-#  afro <- afro %>% select(-dateintr, -strtime) %>%
-#   mutate_all(~na_if(., -1))
+  if (af_round == 1){
+    # Replace 99 with NA
 
-  afro <- haven::as_factor(afro)
+    afro <- afro %>% mutate_all(~ replace(., . == 99 | . == "99", NA))
 
-  # Return dataframe
+  }  # This data seems to be pretty clean already
+    # Return dataframe
   afro
 }
