@@ -26,7 +26,8 @@ af_clean <- function(afro){
     # 99 = Missing Data
 
     afro <- afro %>%
-      mutate_all(~ replace(., . == "97" | . == "98" | . == "99" | . == "999" | . == "998" | . == "997" | . == "996", NA)) %>%
+      mutate(dateintr = as.character(dateintr)) %>%
+      mutate_all(~ replace(., . == "97" | . == "98" | . == "99" | . > "995", NA)) %>%
       mutate_if(., is.labelled, as_factor)
   }
   else if (af_round ==2 | af_round == 3 | af_round ==4 | af_round ==5 | af_round ==6){
@@ -39,9 +40,12 @@ af_clean <- function(afro){
     # 998 Refused to Answer
     # 999 Don't Know / 9999
     afro <- afro %>%
-      mutate_all(~ replace(., . == "-1" | . == "995" | . == "996" | . == "997" | . == "998" | . == "98" | . == "9995" | . == "9996" | . == "9997" | . == "9998" | . == "98", NA)) %>%
+      mutate(dateintr = as.character(dateintr)) %>%
+      mutate_all(~ replace(., . == "-1" | . == "995" | . == "996" | . == "997" | . == "998" | . == "98" | . > "9995" | . == "98", NA)) %>%
       mutate_if(., is.labelled, as_factor)
+    # %>%  mutate_if(., is.labelled, as_factor)
   }  # This data seems to be pretty clean already
     # Return dataframe
+  View(afro)
   afro
 }
