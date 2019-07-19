@@ -57,11 +57,12 @@ af_tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"
       #  filter(eval(parse(text=question)) != "Refused")
     }
     g <- a %>%
-      ggplot(aes(x=eval(parse(text=question)))) +
+      ggplot(aes(x=eval(parse(text=question)), fill=eval(parse(text=question)))) +
       theme_minimal() +
       xlab("")+
       ylab("Count") +
-      ggtitle(label=var_label(afro[question][1])[[1]], subtitle = paste("Source: Afrobarometer, Round", af_round)) +
+      labs(fill="") +
+      ggtitle(label=var_label(afro[question][1])[[1]], subtitle = paste("Source: Afrobarometer, Round", af_round))+ scale_fill_manual(values=c("#B22E2F","#E0673B", "#986B49", "#E9C777","#9BBFA6", "#4C4C4C")) +
       geom_bar()
 
 
@@ -95,20 +96,21 @@ af_tab <- function(afro, question, question2=NULL, digits=2, miss=F, pos="dodge"
       a <- afro
     }
     else{
-      a< - afro %>% af_rem_miss(question) %>% af_rem_miss(question2)
+      a <- afro %>% af_rem_miss(question) %>% af_rem_miss(question2)
     }
 
     title <- paste(var_label(afro[question][1])[[1]],var_label(afro[question2][1])[[1]], sep=" by \n")
     g <- a %>%
       #ggplot(aes(x=eval(parse(text=question)), y=eval(parse(text=question2)))) +
-      ggplot(aes(x=eval(parse(text=question)))) +
+      ggplot(aes(x=eval(parse(text=question)), fill=eval(parse(text=question2)))) +
       theme_minimal() +
       xlab("")+
       ylab("Count") +
-
+      labs(fill="") +
       ggtitle(label=title, subtitle = paste("Source: Afrobarometer, Round", af_round)) +
       labs(fill="") +
-      geom_bar(aes(fill=eval(parse(text=question2))), position=pos)
+      scale_fill_manual(values=c("#B22E2F","#E0673B", "#986B49", "#E9C777","#9BBFA6", "#4C4C4C")) +
+      geom_bar(position=pos)
 
     print(g)
 
